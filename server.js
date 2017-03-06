@@ -38,8 +38,12 @@ var apiCall = function (req, res, next) {
 };
 
 router.get('/', apiCall, function (req, res) {
+
+    // Avoid CORS
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+    // Send respond to client
     if (req.error) {
         res.status(500);
         res.send(req.error.toString())
@@ -48,6 +52,7 @@ router.get('/', apiCall, function (req, res) {
     }
 });
 
+// Append router to express
 app.use('/report', router);
 
 var appServer = app.listen(3000, function () {
