@@ -1,9 +1,19 @@
 import React from 'react';
-import Navigation from '../components/navigation'
+import Navigation from '../components/navigation';
+var request = require('xhr-request');
 
-class Home extends React.Component {
+class Default extends React.Component {
     constructor() {
         super();
+    }
+
+    componentWillMount() {
+        request('http://localhost:3000/report', {
+            xml: true
+        }, (err, res) => {
+            if (err) console.log(err);
+            console.log(res);
+        })
     }
 
     render() {
@@ -15,4 +25,4 @@ class Home extends React.Component {
         );
     }
 }
-export default Home;
+export default Default;
